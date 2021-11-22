@@ -155,12 +155,15 @@ def event_handle(event):
             replyObj=TextSendMessage (text="กินดิ")
         elif msg == "ไปเที่ยวกันมั้ยยย":
             replyObj=TextSendMessage (text="ไม่อ่ะ ขก")
-        else :
-            replyObj=TextSendMessage (text="ไม่รู้อ่ะ")
+        else msg == "นอนเหอะ":
+            replyObj=TextSendMessage (text="เออๆ")
             line_bot_api.reply_message(rtoken, replyObj)
         else :
-            replyObj=TextSendMessage (text="ไม่รู้อ่ะ")
-            line_bot_api.reply_message(rtoken, replyObj)
+            headers = request.headers 
+            json_headers = ({k:v for k, v in headers.items()}) 
+            json_headers.update({'Host':'bots.dialogflow.com'}) 
+            url = "" 
+            requests.post(url,data=json_line, headers=json_headers)
     elif msgType == "image":
         try:
             message_content = line_bot_api.get_message_content(event['message']['id'])
